@@ -25,8 +25,8 @@ string UltimoSenha;
 
 string Perguntas[3] = {
     "Em que ano o Brasil perdeu por 7-1 na semifinal?",
-    "Quem é considerado o melhor jogador brasileiro de todos os tempos?",
-    "Quem é o maior artilheiro da Champions League?"
+    "Quem Ã© considerado o melhor jogador brasileiro de todos os tempos?",
+    "Quem Ã© o maior artilheiro da Champions League?"
 };
 
 char Respostas[3] = {'b', 'a', 'c'};
@@ -131,7 +131,7 @@ void SaveScores()
 void Exitprogram()
 {
     SaveScores();
-    cout << "Escolha não atribuida" << endl;
+    cout << "Escolha nÃ£o atribuida" << endl;
     exit(0);
 }
 
@@ -215,7 +215,7 @@ void StartQuiz()
         cout << "Escolha o tema:" << endl;
         cout << "1: Futebol" << endl;
         cout << "2: Geografia" << endl;
-        cout << "3: Matemática" << endl;
+        cout << "3: MatemÃ¡tica" << endl;
         int resposta;
         cin >> resposta;
 
@@ -260,8 +260,8 @@ void Tela()
         {
             if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha)
             {
-                cout << "Nome do Usuário: " << usuario.nomeLogin2 << endl;
-                cout << "Pontuação: " << usuario.pontuacao << endl;
+                cout << "Nome do UsuÃ¡rio: " << usuario.nomeLogin2 << endl;
+                cout << "PontuaÃ§Ã£o: " << usuario.pontuacao << endl;
             }
         }
 
@@ -314,7 +314,8 @@ void Login()
             }
         }
 
-        cout << "Nome de usuário ou senha inválidos." << endl;
+        cout << "Nome de usuÃ¡rio ou senha invÃ¡lidos." << endl;
+        return;
     }
 }
 
@@ -324,7 +325,7 @@ void Signup()
 
     string nomeUsuario, senha, nomeLogin;
 
-    cout << "Digite um email novo de usuário: ";
+    cout << "Digite um email novo de usuÃ¡rio: ";
     cin >> nomeUsuario;
 
     cout << "Digite uma senha: ";
@@ -338,7 +339,7 @@ void Signup()
     {
         if (usuario.nome == nomeUsuario)
         {
-            cout << "Nome de usuário já está em uso. Tente novamente." << endl;
+            cout << "Nome de usuÃ¡rio jÃ¡ estÃ¡ em uso. Tente novamente." << endl;
             system("PAUSE");
             return;
         }
@@ -351,7 +352,7 @@ void Signup()
     novoUsuario.pontuacao = 0;
     usuarios.push_back(novoUsuario);
 
-    cout << "Usuário registrado com sucesso!" << endl;
+    cout << "UsuÃ¡rio registrado com sucesso!" << endl;
     system("PAUSE");
 
     // Save the updated accounts to the file
