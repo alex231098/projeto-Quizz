@@ -226,16 +226,8 @@ string GetPassword()
     return password;
 }
 #endif
-
-void StartQuiz() {
-    int score = 0;
-    char response;
-
-    cout << "Welcome to the math quiz!" << endl;
-    cout << "Press 'y' to begin the quiz" << endl;
-    cin >> response;
-     if (response == 'y')
-    {
+void tema() {
+        int score = 0;
         cout << "Escolha o tema:" << endl;
         cout << "1: Futebol" << endl;
         cout << "2: Geografia" << endl;
@@ -416,9 +408,364 @@ void StartQuiz() {
             }
         }
 
+        else if (resposta == 2)
+        {
+            perguntas questao1;
+        questao1.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao1.respostaCerta = "2014";
+        questao1.respostaErrada1 = "2018";
+        questao1.respostaErrada2 = "2022";
+        questao1.respostaErrada3 = "2008";
+
+        int opcao;
+        questao1.mostrarPergunta(opcao);
+
+        if (opcao == questao1.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao2;
+        questao2.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao2.respostaCerta = "2014";
+        questao2.respostaErrada1 = "2018";
+        questao2.respostaErrada2 = "2022";
+        questao2.respostaErrada3 = "2008";
 
 
-        cout << "Score: " << score << endl;
+        questao2.mostrarPergunta(opcao);
+
+        if (opcao == questao2.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+           score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao3;
+        questao3.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao3.respostaCerta = "2014";
+        questao3.respostaErrada1 = "2018";
+        questao3.respostaErrada2 = "2022";
+        questao3.respostaErrada3 = "2008";
+
+
+        questao3.mostrarPergunta(opcao);
+
+        if (opcao == questao3.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+           score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao4;
+        questao4.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao4.respostaCerta = "2014";
+        questao4.respostaErrada1 = "2018";
+        questao4.respostaErrada2 = "2022";
+        questao4.respostaErrada3 = "2008";
+
+
+        questao4.mostrarPergunta(opcao);
+
+        if (opcao == questao4.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao5;
+        questao5.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao5.respostaCerta = "2014";
+        questao5.respostaErrada1 = "2018";
+        questao5.respostaErrada2 = "2022";
+        questao5.respostaErrada3 = "2008";
+
+
+        questao5.mostrarPergunta(opcao);
+
+        if (opcao == questao5.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+           score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao6;
+        questao6.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao6.respostaCerta = "2014";
+        questao6.respostaErrada1 = "2018";
+        questao6.respostaErrada2 = "2022";
+        questao6.respostaErrada3 = "2008";
+
+
+        questao6.mostrarPergunta(opcao);
+
+        if (opcao == questao6.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao7;
+        questao7.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao7.respostaCerta = "2014";
+        questao7.respostaErrada1 = "2018";
+        questao7.respostaErrada2 = "2022";
+        questao7.respostaErrada3 = "2008";
+
+
+        questao7.mostrarPergunta(opcao);
+
+        if (opcao == questao7.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+        }
+
+        else if (resposta == 3)
+        {
+            perguntas questao1;
+        questao1.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao1.respostaCerta = "2014";
+        questao1.respostaErrada1 = "2018";
+        questao1.respostaErrada2 = "2022";
+        questao1.respostaErrada3 = "2008";
+
+        int opcao;
+        questao1.mostrarPergunta(opcao);
+
+        if (opcao == questao1.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao2;
+        questao2.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao2.respostaCerta = "2014";
+        questao2.respostaErrada1 = "2018";
+        questao2.respostaErrada2 = "2022";
+        questao2.respostaErrada3 = "2008";
+
+
+        questao2.mostrarPergunta(opcao);
+
+        if (opcao == questao2.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+           score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao3;
+        questao3.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao3.respostaCerta = "2014";
+        questao3.respostaErrada1 = "2018";
+        questao3.respostaErrada2 = "2022";
+        questao3.respostaErrada3 = "2008";
+
+
+        questao3.mostrarPergunta(opcao);
+
+        if (opcao == questao3.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+           score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao4;
+        questao4.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao4.respostaCerta = "2014";
+        questao4.respostaErrada1 = "2018";
+        questao4.respostaErrada2 = "2022";
+        questao4.respostaErrada3 = "2008";
+
+
+        questao4.mostrarPergunta(opcao);
+
+        if (opcao == questao4.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao5;
+        questao5.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao5.respostaCerta = "2014";
+        questao5.respostaErrada1 = "2018";
+        questao5.respostaErrada2 = "2022";
+        questao5.respostaErrada3 = "2008";
+
+
+        questao5.mostrarPergunta(opcao);
+
+        if (opcao == questao5.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+           score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao6;
+        questao6.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao6.respostaCerta = "2014";
+        questao6.respostaErrada1 = "2018";
+        questao6.respostaErrada2 = "2022";
+        questao6.respostaErrada3 = "2008";
+
+
+        questao6.mostrarPergunta(opcao);
+
+        if (opcao == questao6.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+             perguntas questao7;
+        questao7.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
+        questao7.respostaCerta = "2014";
+        questao7.respostaErrada1 = "2018";
+        questao7.respostaErrada2 = "2022";
+        questao7.respostaErrada3 = "2008";
+
+
+        questao7.mostrarPergunta(opcao);
+
+        if (opcao == questao7.indiceRespostaCorreta) {
+            cout << "Parabéns, está certo!";
+            score = score + 5;
+
+            for (auto &usuario : usuarios) {
+                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                    usuario.pontuacao = score;
+                    break;
+                }
+            }
+        }
+        else {
+            cout << "Resposta errada!";
+            }
+        }
+
+
+
+        cout << "Score: " << score << endl;}
+
+void StartQuiz() {
+
+    char response;
+
+    cout << "Welcome to the math quiz!" << endl;
+    cout << "Press 'y' to begin the quiz" << endl;
+    cin >> response;
+     if (response == 'y')
+    {
+       tema();
     }
     else {
         Exitprogram();
