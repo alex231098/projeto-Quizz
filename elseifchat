@@ -1,0 +1,212 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <map>
+#include <locale.h>
+#include <vector>
+#include <stdio.h>
+#include <fstream>
+
+#ifdef _WIN32
+#define CLEAR_COMMAND "CLS"
+#else
+#define CLEAR_COMMAND "clear"
+#endif
+
+using namespace std;
+
+string Perguntas[3] = {
+    "Em que ano o Brasil perdeu por 7-1 na semi-final?\n\na) 2010\nb) 2014\nc) 1822\nd) 2018\n",
+    "Quem é considerado o melhor jogador brasileiro de todos os tempos?",
+    "Quem é o maior artilheiro da Liga dos Campeões?"
+};
+
+char Respostas[3] = {'b', 'd', 'a'};
+
+struct PerguntasRespostas {
+    string PerguntasGuardadas;
+    char RespostasGuardadas;
+};
+
+void ExitProgram() {
+    cout << "Choice not available" << endl;
+    exit(0);
+}
+
+struct Utilizador {
+    string nome;
+    string senha;
+    string nomeLogin2;
+    int pontuacao;
+};
+
+vector<PerguntasRespostas> TUDO;
+vector<Utilizador> usuarios;
+
+string UltimoNome;
+string UltimoSenha;
+
+void StartQuiz() {
+    cout << "Escolha o tema:\n";
+    cout << "1: Futebol\n";
+    cout << "2: Geografia\n";
+    cout << "3: Matemática\n";
+    int resposta;
+    cin >> resposta;
+    int score = 0;
+    if (resposta == 1) {
+        char respostafut;
+        srand(time(NULL));
+
+        for (int i = 0; i < 3; i++) {
+            string respostafinal = Perguntas[rand() % 3];
+            cout << respostafinal;
+            cin >> respostafut;
+
+            if (respostafinal == Perguntas[0] && respostafut == 'b') {
+                cout << "Parabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == Perguntas[1] && respostafut == 'd') {
+                cout << "Parabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == Perguntas[2] && respostafut == 'a') {
+                cout << "Parabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else {
+                cout << "Resposta errada!";
+            }
+        }
+    }
+}
+
+void Login() {
+    system(CLEAR_COMMAND);
+    string nomeUsuario, senha;
+    int x = 0;
+
+    while (x == 0) {
+        cout << "Email: ";
+        cin >> nomeUsuario;
+        cout << "Senha: ";
+        cin >> senha;
+
+        for (auto& usuario : usuarios) {
+            if (usuario.nome == nomeUsuario && usuario.senha == senha) {
+                cout << "Seja bem-vindo! Login realizado com sucesso." << endl;
+                ofstream fp;
+                fp.open("dados.txt", ios_base::app); // append instead of overwrite
+                fp << nomeUsuario << "\n" << senha << "\n" << endl;
+                UltimoNome = nomeUsuario;
+                UltimoSenha = senha;
+                x = 1;
+                return;
+            }
+        }
+
+        cout << "Nome de usuário ou senha inválidos." << endl;
+    }
+}
+
+void Tela() {
+    while (true) {
+        for (auto& usuario : usuarios) {
+            if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                cout << "Nome do usuário: " << usuario.nomeLogin2 << endl;
+                cout << "Pontuação: " << usuario.pontuacao << endl;
+            }
+        }
+
+        cout << "3. Iniciar Jogo" << endl;
+        cout << "4. Sair" << endl;
+        cout << "Enter your choice: ";
+
+        int choice = 0;
+        cin >> choice;
+
+        if (choice == 3) {
+            StartQuiz();
+        } else {
+            if (choice == 4) {
+                break;
+            }
+            ExitProgram();
+        }
+    }
+}
+
+void Signup() {
+    system(CLEAR_COMMAND);
+    string nomeUsuario, senha, nomeLogin;
+
+    cout << "Digite um email novo de usuário: ";
+    cin >> nomeUsuario;
+    cout << "Digite uma senha: ";
+    cin >> senha;
+    cout << "Digite seu nome completo: ";
+    cin.ignore();
+    getline(cin, nomeLogin);
+
+    for (const auto& usuario : usuarios) {
+        if (usuario.nome == nomeUsuario) {
+            cout << "Nome de usuário já está em uso. Tente novamente." << endl;
+            system("PAUSE");
+            return;
+        }
+    }
+
+    Utilizador novoUsuario;
+    novoUsuario.nome = nomeUsuario;
+    novoUsuario.senha = senha;
+    novoUsuario.nomeLogin2 = nomeLogin;
+    novoUsuario.pontuacao = 0;
+    usuarios.push_back(novoUsuario);
+
+    cout << "Usuário registrado com sucesso!" << endl;
+    system("PAUSE");
+}
+
+int main() {
+    cout << "Welcome to the Quiz App" << endl;
+    setlocale(LC_ALL, "Portuguese");
+
+    while (true) {
+        cout << "1. Signup" << endl;
+        cout << "2. Login" << endl;
+        cout << "Enter your choice: ";
+        int choice;
+        cin >> choice;
+
+        if (choice == 1) {
+            Signup();
+        } else if (choice == 2) {
+            Login();
+            Tela();
+        } else {
+            ExitProgram();
+        }
+    }
+
+    return 0;
+}
