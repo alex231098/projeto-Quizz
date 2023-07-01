@@ -30,31 +30,28 @@ string UltimoNome;
 string UltimoSenha;
 
 
+string SafetyQuestion[3] = {
+    "\nQual é o nome da sua mãe?\n",
+    "\nQual é o nome do seu animal de estimação?\n",
+    "\nQual é a sua cor favorita?\n"
+};
 
-struct perguntas {
-    string pergunta;
-    string respostaCerta;
-    string respostaErrada1;
-    string respostaErrada2;
-    string respostaErrada3;
-    int indiceRespostaCorreta;
 
-    void mostrarPergunta(int& opcao) {
-        string respostasAleatorias[4] = { respostaCerta, respostaErrada1, respostaErrada2, respostaErrada3 };
 
-        unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-        shuffle(begin(respostasAleatorias), end(respostasAleatorias), default_random_engine(seed));
-
-        cout << pergunta << endl;
-        for (int i = 0; i < 4; i++) {
-            cout << i + 1 << ". " << respostasAleatorias[i] << endl;
-            if (respostasAleatorias[i] == respostaCerta) {
-                indiceRespostaCorreta = i + 1;
-            }
-        }
-        cout << "Escolha uma opção (1-4): ";
-        cin >> opcao;
-    }
+string PerguntasCelebs[3] = {
+    "\nEm que ano o Brasil perdeu por 7-1 na semi-final?\n\na) 2010\nb) 2014\nc) 1822\nd) 2018\n",
+    "\nQuem é considerado o melhor jogador brasileiro de todos os tempos?",
+    "\nQuem é o maior artilheiro da Liga dos Campeões?"
+};
+string PerguntasGeo[3] = {
+    "\nEm que ano o Brasil perdeu por 7-1 na semi-final?\n\na) 2010\nb) 2014\nc) 1822\nd) 2018\n",
+    "\nQuem é considerado o melhor jogador brasileiro de todos os tempos?",
+    "\nQuem é o maior artilheiro da Liga dos Campeões?"
+};
+string PerguntasHist[3] = {
+    "\nEm que ano o Brasil perdeu por 7-1 na semi-final?\n\na) 2010\nb) 2014\nc) 1822\nd) 2018\n",
+    "\nQuem é considerado o melhor jogador brasileiro de todos os tempos?",
+    "\nQuem é o maior artilheiro da Liga dos Campeões?"
 };
 
 struct Utilizador
@@ -62,10 +59,27 @@ struct Utilizador
     string nome;
     string senha;
     string nomeLogin2;
+    string perguntaSeguranca;
+    string respostaSeguranca;
     int pontuacao;
 };
 
 vector<Utilizador> usuarios;
+
+
+void DisplayLeaderboard() {
+    // Sort the players based on their scores in descending order
+    sort(usuarios.begin(), usuarios.end(), [](const Utilizador &a, const Utilizador &b) {
+        return a.pontuacao > b.pontuacao;
+    });
+
+    cout << "\nTabela de Líderes:\n";
+    for (const auto &usuario : usuarios) {
+        cout << usuario.nomeLogin2 << " - Pontuação: " << usuario.pontuacao << endl;
+    }
+}
+
+
 void SaveAccounts()
 {
     ofstream file("accounts.txt");
@@ -79,7 +93,9 @@ void SaveAccounts()
     {
         file << usuario.nome << "\n"
              << usuario.senha << "\n"
-             << usuario.nomeLogin2 << "\n";
+             << usuario.nomeLogin2 << "\n"
+             << usuario.perguntaSeguranca << "\n"
+             << usuario.respostaSeguranca << "\n";
     }
 
     file.close();
@@ -109,6 +125,13 @@ void DeleteUser()
     else
     {
         cout << "User not found." << endl;
+    }
+}
+void ResetScores()
+{
+    for (auto &usuario : usuarios)
+    {
+        usuario.pontuacao = 0;
     }
 }
 
@@ -156,7 +179,7 @@ void SaveScores()
 
 void Exitprogram()
 {
-    SaveScores();
+
     cout << "Escolha não atribuida" << endl;
     exit(0);
 }
@@ -170,19 +193,22 @@ void LoadAccounts()
         return;
     }
 
-    string nomeUsuario, senha, nomeLogin;
-    while (getline(file, nomeUsuario) && getline(file, senha) && getline(file, nomeLogin))
+    string nomeUsuario, senha, nomeLogin,perguntaSeguranca,respostaSeguranca;
+    while (getline(file, nomeUsuario) && getline(file, senha) && getline(file, nomeLogin)&& getline(file, perguntaSeguranca)&& getline(file, respostaSeguranca))
     {
         Utilizador usuario;
         usuario.nome = nomeUsuario;
         usuario.senha = senha;
         usuario.nomeLogin2 = nomeLogin;
         usuario.pontuacao = 0;
+        usuario.perguntaSeguranca = perguntaSeguranca;
+        usuario.respostaSeguranca = respostaSeguranca;
         usuarios.push_back(usuario);
     }
 
     file.close();
 }
+
 
 #ifdef _WIN32
 string GetPassword()
@@ -211,6 +237,7 @@ string GetPassword()
     return password;
 }
 #else
+
 string GetPassword()
 {
     string password;
@@ -229,541 +256,163 @@ string GetPassword()
 void tema() {
         int score = 0;
         cout << "Escolha o tema:" << endl;
-        cout << "1: Futebol" << endl;
+        cout << "1: Celebridades" << endl;
         cout << "2: Geografia" << endl;
-        cout << "3: Matemática" << endl;
+        cout << "3: História" << endl;
         int resposta;
         cin >> resposta;
+        char respostafut;
 
+         if (resposta == 1) {
 
-        if (resposta == 1)
-        {
-            perguntas questao1;
-        questao1.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao1.respostaCerta = "2014";
-        questao1.respostaErrada1 = "2018";
-        questao1.respostaErrada2 = "2022";
-        questao1.respostaErrada3 = "2008";
+        srand(time(NULL));
 
-        int opcao;
-        questao1.mostrarPergunta(opcao);
+        for (int i = 0; i < 10; i++) {
+            string respostafinal = PerguntasCelebs[rand() % 3];
+            cout << respostafinal;
+            cin >> respostafut;
 
-        if (opcao == questao1.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
+            if (respostafinal == PerguntasCelebs[0] && respostafut == 'b') {
+                cout << "Parabéns, está certo!";
+                score += 5;
 
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao2;
-        questao2.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao2.respostaCerta = "2014";
-        questao2.respostaErrada1 = "2018";
-        questao2.respostaErrada2 = "2022";
-        questao2.respostaErrada3 = "2008";
+            } else if (respostafinal == PerguntasCelebs[1] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
 
-
-        questao2.mostrarPergunta(opcao);
-
-        if (opcao == questao2.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao3;
-        questao3.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao3.respostaCerta = "2014";
-        questao3.respostaErrada1 = "2018";
-        questao3.respostaErrada2 = "2022";
-        questao3.respostaErrada3 = "2008";
+            } else if (respostafinal == PerguntasCelebs[2] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
 
-
-        questao3.mostrarPergunta(opcao);
-
-        if (opcao == questao3.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
+            } else {
+                cout << "\nResposta errada!";
             }
         }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao4;
-        questao4.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao4.respostaCerta = "2014";
-        questao4.respostaErrada1 = "2018";
-        questao4.respostaErrada2 = "2022";
-        questao4.respostaErrada3 = "2008";
 
+        }
 
-        questao4.mostrarPergunta(opcao);
+        else if (resposta == 2) {
 
-        if (opcao == questao4.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
+        srand(time(NULL));
 
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+        for (int i = 0; i < 10; i++) {
+            string respostafinal = PerguntasGeo[rand() % 3];
+            cout << respostafinal;
+            cin >> respostafut;
+
+            if (respostafinal == PerguntasGeo[0] && respostafut == 'b') {
+                cout << "Parabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao5;
-        questao5.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao5.respostaCerta = "2014";
-        questao5.respostaErrada1 = "2018";
-        questao5.respostaErrada2 = "2022";
-        questao5.respostaErrada3 = "2008";
+            } else if (respostafinal == PerguntasGeo[1] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
 
-
-        questao5.mostrarPergunta(opcao);
-
-        if (opcao == questao5.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao6;
-        questao6.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao6.respostaCerta = "2014";
-        questao6.respostaErrada1 = "2018";
-        questao6.respostaErrada2 = "2022";
-        questao6.respostaErrada3 = "2008";
+            } else if (respostafinal == PerguntasGeo[2] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
 
-
-        questao6.mostrarPergunta(opcao);
-
-        if (opcao == questao6.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
+            } else {
+                cout << "\nResposta errada!";
             }
         }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao7;
-        questao7.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao7.respostaCerta = "2014";
-        questao7.respostaErrada1 = "2018";
-        questao7.respostaErrada2 = "2022";
-        questao7.respostaErrada3 = "2008";
+    }
 
+         else if (resposta == 3) {
 
-        questao7.mostrarPergunta(opcao);
+        srand(time(NULL));
 
-        if (opcao == questao7.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
+        for (int i = 0; i < 10; i++) {
+            string respostafinal = PerguntasHist[rand() % 3];
+            cout << respostafinal;
+            cin >> respostafut;
 
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+            if (respostafinal == PerguntasHist[0] && respostafut == 'b') {
+                cout << "Parabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-        }
+            } else if (respostafinal == PerguntasHist[1] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
 
-        else if (resposta == 2)
-        {
-            perguntas questao1;
-        questao1.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao1.respostaCerta = "2014";
-        questao1.respostaErrada1 = "2018";
-        questao1.respostaErrada2 = "2022";
-        questao1.respostaErrada3 = "2008";
-
-        int opcao;
-        questao1.mostrarPergunta(opcao);
-
-        if (opcao == questao1.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao2;
-        questao2.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao2.respostaCerta = "2014";
-        questao2.respostaErrada1 = "2018";
-        questao2.respostaErrada2 = "2022";
-        questao2.respostaErrada3 = "2008";
+            } else if (respostafinal == PerguntasHist[2] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
 
-
-        questao2.mostrarPergunta(opcao);
-
-        if (opcao == questao2.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
                 }
+            } else {
+                cout << "\nResposta errada!";
             }
         }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao3;
-        questao3.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao3.respostaCerta = "2014";
-        questao3.respostaErrada1 = "2018";
-        questao3.respostaErrada2 = "2022";
-        questao3.respostaErrada3 = "2008";
-
-
-        questao3.mostrarPergunta(opcao);
-
-        if (opcao == questao3.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao4;
-        questao4.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao4.respostaCerta = "2014";
-        questao4.respostaErrada1 = "2018";
-        questao4.respostaErrada2 = "2022";
-        questao4.respostaErrada3 = "2008";
-
-
-        questao4.mostrarPergunta(opcao);
-
-        if (opcao == questao4.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao5;
-        questao5.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao5.respostaCerta = "2014";
-        questao5.respostaErrada1 = "2018";
-        questao5.respostaErrada2 = "2022";
-        questao5.respostaErrada3 = "2008";
-
-
-        questao5.mostrarPergunta(opcao);
-
-        if (opcao == questao5.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao6;
-        questao6.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao6.respostaCerta = "2014";
-        questao6.respostaErrada1 = "2018";
-        questao6.respostaErrada2 = "2022";
-        questao6.respostaErrada3 = "2008";
-
-
-        questao6.mostrarPergunta(opcao);
-
-        if (opcao == questao6.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao7;
-        questao7.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao7.respostaCerta = "2014";
-        questao7.respostaErrada1 = "2018";
-        questao7.respostaErrada2 = "2022";
-        questao7.respostaErrada3 = "2008";
-
-
-        questao7.mostrarPergunta(opcao);
-
-        if (opcao == questao7.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-        }
-
-        else if (resposta == 3)
-        {
-            perguntas questao1;
-        questao1.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao1.respostaCerta = "2014";
-        questao1.respostaErrada1 = "2018";
-        questao1.respostaErrada2 = "2022";
-        questao1.respostaErrada3 = "2008";
-
-        int opcao;
-        questao1.mostrarPergunta(opcao);
-
-        if (opcao == questao1.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao2;
-        questao2.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao2.respostaCerta = "2014";
-        questao2.respostaErrada1 = "2018";
-        questao2.respostaErrada2 = "2022";
-        questao2.respostaErrada3 = "2008";
-
-
-        questao2.mostrarPergunta(opcao);
-
-        if (opcao == questao2.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao3;
-        questao3.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao3.respostaCerta = "2014";
-        questao3.respostaErrada1 = "2018";
-        questao3.respostaErrada2 = "2022";
-        questao3.respostaErrada3 = "2008";
-
-
-        questao3.mostrarPergunta(opcao);
-
-        if (opcao == questao3.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao4;
-        questao4.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao4.respostaCerta = "2014";
-        questao4.respostaErrada1 = "2018";
-        questao4.respostaErrada2 = "2022";
-        questao4.respostaErrada3 = "2008";
-
-
-        questao4.mostrarPergunta(opcao);
-
-        if (opcao == questao4.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao5;
-        questao5.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao5.respostaCerta = "2014";
-        questao5.respostaErrada1 = "2018";
-        questao5.respostaErrada2 = "2022";
-        questao5.respostaErrada3 = "2008";
-
-
-        questao5.mostrarPergunta(opcao);
-
-        if (opcao == questao5.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-           score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao6;
-        questao6.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao6.respostaCerta = "2014";
-        questao6.respostaErrada1 = "2018";
-        questao6.respostaErrada2 = "2022";
-        questao6.respostaErrada3 = "2008";
-
-
-        questao6.mostrarPergunta(opcao);
-
-        if (opcao == questao6.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-             perguntas questao7;
-        questao7.pergunta = "Em que ano o Brasil perdeu por 7-1 na semifinal?";
-        questao7.respostaCerta = "2014";
-        questao7.respostaErrada1 = "2018";
-        questao7.respostaErrada2 = "2022";
-        questao7.respostaErrada3 = "2008";
-
-
-        questao7.mostrarPergunta(opcao);
-
-        if (opcao == questao7.indiceRespostaCorreta) {
-            cout << "Parabéns, está certo!";
-            score = score + 5;
-
-            for (auto &usuario : usuarios) {
-                if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
-                    usuario.pontuacao = score;
-                    break;
-                }
-            }
-        }
-        else {
-            cout << "Resposta errada!";
-            }
-        }
+    }
 
 
 
-        cout << "Score: " << score << endl;}
+        cout << "Pontuação: " << score << endl;
+        SaveScores();
+         }
 
 void StartQuiz() {
 
     char response;
 
-    cout << "Welcome to the math quiz!" << endl;
-    cout << "Press 'y' to begin the quiz" << endl;
+    cout << "Seja Bem Vindo(a) ao Quizz" << endl;
+    cout << "Presssione 1 para jogar" << endl;
     cin >> response;
-     if (response == 'y')
+     if (response == '1')
     {
        tema();
     }
@@ -785,23 +434,24 @@ void Tela()
             }
         }
 
-        cout << "3. Iniciar Jogo" << endl;
-        cout << "4. Sair" << endl;
-        cout << "Enter your choice: ";
+       cout << "1. Iniciar Jogo" << endl;
+        cout << "2. Sair" << endl;  // Adjust the option numbers accordingly
 
+        cout << "Enter your choice: ";
         int choice = 0;
         cin >> choice;
 
-        if (choice == 3)
+        if (choice == 1)
         {
             StartQuiz();
         }
+
+        else if (choice == 2)
+        {
+            break;
+        }
         else
         {
-            if (choice == 4)
-            {
-                break;
-            }
             Exitprogram();
         }
     }
@@ -843,7 +493,7 @@ void Signup()
 {
     system(CLEAR_COMMAND);
 
-    string nomeUsuario, senha, nomeLogin;
+    string nomeUsuario, senha, nomeLogin, perguntaSeguranca, respostaSeguranca;
 
     cout << "Digite um email novo de usuário: ";
     cin >> nomeUsuario;
@@ -854,6 +504,12 @@ void Signup()
     cout << "Digite seu nome completo: ";
     cin.ignore();
     getline(cin, nomeLogin);
+
+    cout << "Digite uma pergunta de segurança: ";
+    getline(cin, perguntaSeguranca);
+
+    cout << "Digite a resposta da pergunta de segurança: ";
+    getline(cin, respostaSeguranca);
 
     for (const auto &usuario : usuarios)
     {
@@ -869,29 +525,77 @@ void Signup()
     novoUsuario.nome = nomeUsuario;
     novoUsuario.senha = senha;
     novoUsuario.nomeLogin2 = nomeLogin;
+    novoUsuario.perguntaSeguranca = perguntaSeguranca;
+    novoUsuario.respostaSeguranca = respostaSeguranca;
     novoUsuario.pontuacao = 0;
     usuarios.push_back(novoUsuario);
 
-    cout << "Usuário registrado com sucesso!" << endl;
-    system("PAUSE");
+    SaveAccounts(); // Save the updated accounts to the file
 
-    // Save the updated accounts to the file
-    SaveAccounts();
+    cout << "Cadastro realizado com sucesso!" << endl;
+    system("PAUSE");
+}
+
+
+void RecoverPassword()
+{
+    cout << "Digite o email do usuário para recuperar a senha: ";
+    string nomeUsuario;
+    cin >> nomeUsuario;
+
+    Utilizador* usuario = nullptr;
+    for (auto& user : usuarios)
+    {
+        if (user.nome == nomeUsuario)
+        {
+            usuario = &user;
+            break;
+        }
+    }
+
+    if (usuario)
+    {
+        cout << "Pergunta de segurança: " << usuario->perguntaSeguranca << endl;
+        cout << "Digite a resposta de segurança: ";
+        string resposta;
+        cin.ignore();
+        getline(cin, resposta);
+
+        if (resposta == usuario->respostaSeguranca)
+        {
+            cout << "Resposta correta! Digite a nova senha: ";
+            string novaSenha = GetPassword();
+            usuario->senha = novaSenha;
+            cout << "Senha alterada com sucesso!" << endl;
+            SaveAccounts(); // Save the updated accounts to the file
+        }
+        else
+        {
+            cout << "Resposta incorreta. Não é possível recuperar a senha." << endl;
+        }
+    }
+    else
+    {
+        cout << "Usuário não encontrado. Não é possível recuperar a senha." << endl;
+    }
 }
 
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    cout << "Welcome to the Quiz App" << endl;
+    cout << "Sejam Bem Vindos ao Quiz App" << endl;
 
     // Load existing accounts from the file
     LoadAccounts();
     LoadScores();
     while (true)
     {
-        cout << "1. Signup" << endl;
+        cout << "\n1. Signup" << endl;
         cout << "2. Login" << endl;
         cout << "3. Apagar Utilizador" << endl;
+        cout << "4. Tabela de Líderes" << endl;
+        cout << "5. Reset de pontuações" << endl;  // Option to reset scores
+        cout << "6. Recuperar senha" << endl;
         cout << "Escolha um numero: ";
         int choice;
         cin >> choice;
@@ -908,6 +612,20 @@ int main()
         {
             DeleteUser();
             SaveAccounts();
+        }
+        else if (choice == 4) // Handle the new option
+        {
+            DisplayLeaderboard();
+        }
+        else if (choice == 5)
+        {
+            ResetScores();  // Call the function to reset scores
+            cout << "Pontuações Apagadas com sucesso." << endl;
+            SaveScores();  // Save the updated scores to the file
+        }
+        else if (choice == 6)
+        {
+            RecoverPassword();
         }
         else
         {
