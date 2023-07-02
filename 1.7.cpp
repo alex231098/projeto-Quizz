@@ -30,12 +30,6 @@ string UltimoNome;
 string UltimoSenha;
 
 
-string SafetyQuestion[3] = {
-    "\nQual é o nome da sua mãe?\n",
-    "\nQual é o nome do seu animal de estimação?\n",
-    "\nQual é a sua cor favorita?\n"
-};
-
 
 
 string PerguntasCelebs[15] = {
@@ -61,11 +55,25 @@ string PerguntasGeo[3] = {
     "\nQuem é considerado o melhor jogador brasileiro de todos os tempos?",
     "\nQuem é o maior artilheiro da Liga dos Campeões?"
 };
-string PerguntasHist[3] = {
-    "\nEm que ano o Brasil perdeu por 7-1 na semi-final?\n\na) 2010\nb) 2014\nc) 1822\nd) 2018\n",
-    "\nQuem é considerado o melhor jogador brasileiro de todos os tempos?",
-    "\nQuem é o maior artilheiro da Liga dos Campeões?"
+string PerguntasHist[15] = {
+"\nNo início do século 20, aconteceram grandes eventos com alcance e impacto mundial. Um deles foi a Primeira Guerra. Você sabe dizer em qual período ela aconteceu?\na) 1912 a 1917\nb) 1910 a 1918\nc) 1914 a 1918\nd) 1911 a 1916\n",
+"\nQual é o ano do início da construção da Muralha da China?\na) 220 A.C.\nb) 180 A.C.\nc) 10 D.C.\nd) 100 D.C.\n",
+"\nA biblioteca de Alexandria foi uma das mais significativas e célebres bibliotecas e um dos maiores centros de produção do conhecimento na Antiguidade. Infelizmente ela foi perdida durante um incêndio, sabe dizer em que ano?\na) 50 D.C.\nb) 48 A.C.\nc) 100 A.C.\nd) 30 D.C.\n",
+"\nRecentemente a Netflix lançou uma série sobre uma famosa rainha egípcia, uma produção considerada polêmica devido a maneira como essa rainha foi apresentada. Essa rainha já foi interpretada por Elizabeth Taylor em 1963. Qual o nome dessa rainha?\na) Nefertiti\nb) Rainha Elizabeth II\nc) Chica da Silva\nd) Cleópatra\n",
+"\nNapoleão Bonaparte foi um militar que teve um desempenho elevado dentro do exército, chegando a se tornar o Imperador da França. Qual seria o nome da guerra que removeu a família real francesa de Luiz XVI do trono?\na) Revolução Francesa (1792 até 1802)\nb) Guerra dos Canudos (1893)\nc) Guerra dos Emus (1932)\nd) Guerra do cão que fugiu (1925)\n",
+"\nA frase 'Que comam brioche' é atribuída a antiga rainha francesa e dizem que essa frase pegou muito mal entre os súditos (alimentando o sentimento de insatisfação com a realeza francesa). Sabe dizer quem disse?\na) Margaret Thatcher\nb) Yoko Ono\nc) Greta Thunberg\nd) Maria Antonieta\n",
+"\nA pessoa mais nova a ser laureada com um prémio nobel foi uma ativista paquistanesa, Malala Yousafzai. Infelizmente ela sofreu um atentado à sua vida por dar voz a um tema importante em seu país. Qual seria o tema pelo qual a ativista luta?\na) A declaração de guerra aos gatos pretos durante a idade média\nb) Ordenar que o cavalo Incitatus se tornasse um padre\nc) Direitos civis das mulheres\nd) Permissão para visitar a Disney\n",
+"\nEm 1916, um navio espanhol naufragou em Ilhabela, no litoral norte de São Paulo, e deixou 477 mortos. O naufrágio é comparado ao do Titanic - a maior tragédia marítima brasileira. Vamos listar alguns navios, como se chama?\na) Darth\nb) Aymoré\nc) Ocean Gate\nd) Príncipe de Astúrias\n",
+"\nExiste um corsário que aterrorizou as águas do litoral brasileiro, dizem até que ele deixou um tesouro escondido em Ilhabela durante uma de suas fugas, após saquear a Vila de Santos e São Vicente. Qual o nome do corsário inglês que também era pirata undercover?\na) Thomas Cavendish\nb) Kylian Mbappé\nc) Marcelo Rebelo\nd) Donald Trump\n",
+"\nGone with the Wind (E o Vento Levou) é um filme americano feito em 1939 que retrata um período importante dos Estados Unidos, a luta travada em Estados do Norte contra estados sulistas pela libertação dos escravos. Qual é o nome dessa guerra?\na) Guerra que durou 335 anos\nb) Guerra de Secessão\nc) Guerra do Barril\nd) Guerra do Futebol\n",
+"\nTalvez a mais conhecida das prisões insulares localizada em São Francisco, a Ilha de Alcatraz possui um famoso presídio que já abrigou um famoso gangster. Qual seria o nome do gangster e também contrabandista que foi enviado para lá em 1934?\na) Al Capone\nb) Il Bidone\nc) Clinton Eastwood\nd) Neymar Jr\n",
+"\nSentinela do Norte é uma das ilhas do arquipélago das Andamão, na baía de Bengala, e é considerado um local proibido para turismo (o povo nativo não gosta muito de visitas), porém, é sabido que existe um explorador que conseguiu pisar os pés na ilha. Qual seria o seu nome e o período em que isso aconteceu?\na) Maurice Vidal Portman no século XIX\nb) Dom Afonso Henriques, em 1128\nc) Xanana Gusmão, 1967\nd) Getúlio Vargas, 1945\n",
+"\nEm XXXX, o presidente dos Estados Unidos, George Washington, organizou um concurso para projetar a casa presidencial. Em que ano isso aconteceu?\na) 1945\nb) 1792\nc) 1546\nd) 2001\n",
+"\nQual o nome do acordo assinado entre Espanha e Portugal, assinado em 7 de junho de 1424?\na) Pacto germano-soviético\nb) Tratado de Madri\nc) Tratado de Tordesilhas\nd) Acordo de Jules Rimet\n",
+"\nA Inglaterra já foi lar de uma rainha portuguesa, a mesma que trouxe a tradição de tomar chá para o reinado. Qual era o seu nome?\na) Teresa Cristina das Duas Sicílias\nb) Princesa Isabel, a Redentora\nc) Barbara Tinoco\nd) Catarina de Bragança\n"
 };
+
+
 
 struct Utilizador
 {
@@ -280,7 +288,7 @@ void tema() {
 
         srand(time(NULL));
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 10; i++) {
             string respostafinal = PerguntasCelebs[rand() % 15];
             cout << respostafinal;
             cin >> respostafut;
@@ -492,11 +500,11 @@ void tema() {
         srand(time(NULL));
 
         for (int i = 0; i < 10; i++) {
-            string respostafinal = PerguntasHist[rand() % 3];
+            string respostafinal = PerguntasHist[rand() % 15];
             cout << respostafinal;
             cin >> respostafut;
 
-            if (respostafinal == PerguntasHist[0] && respostafut == 'b') {
+            if (respostafinal == PerguntasHist[0] && respostafut == 'c') {
                 cout << "Parabéns, está certo!";
                 score += 5;
 
@@ -506,7 +514,7 @@ void tema() {
                         break;
                     }
                 }
-            } else if (respostafinal == PerguntasHist[1] && respostafut == 'd') {
+            } else if (respostafinal == PerguntasHist[1] && respostafut == 'a') {
                 cout << "\nParabéns, está certo!";
                 score += 5;
 
@@ -516,7 +524,127 @@ void tema() {
                         break;
                     }
                 }
-            } else if (respostafinal == PerguntasHist[2] && respostafut == 'a') {
+            } else if (respostafinal == PerguntasHist[2] && respostafut == 'b') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                } else if (respostafinal == PerguntasHist[3] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                } else if (respostafinal == PerguntasHist[4] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                } else if (respostafinal == PerguntasHist[5] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                } else if (respostafinal == PerguntasHist[6] && respostafut == 'c') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                } else if (respostafinal == PerguntasHist[7] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                } else if (respostafinal == PerguntasHist[8] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                }else if (respostafinal == PerguntasHist[9] && respostafut == 'b') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                }else if (respostafinal == PerguntasHist[10] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                }else if (respostafinal == PerguntasHist[11] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                }else if (respostafinal == PerguntasHist[12] && respostafut == 'b') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                }else if (respostafinal == PerguntasHist[13] && respostafut == 'c') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+                } else if (respostafinal == PerguntasHist[14] && respostafut == 'd') {
                 cout << "\nParabéns, está certo!";
                 score += 5;
 
