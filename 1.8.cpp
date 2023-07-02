@@ -50,11 +50,25 @@ string PerguntasCelebs[15] = {
     "\nQual ator interpretou o personagem Rick Blaine no filme Casablanca?\n\na) Marlon Brando\nb) Clark Gable\nc) Humphrey Bogart\nd) James Stewart\n",
 
 };
-string PerguntasGeo[3] = {
-    "\nEm que ano o Brasil perdeu por 7-1 na semi-final?\n\na) 2010\nb) 2014\nc) 1822\nd) 2018\n",
-    "\nQuem é considerado o melhor jogador brasileiro de todos os tempos?",
-    "\nQuem é o maior artilheiro da Liga dos Campeões?"
-};
+string PerguntasGeo[15] = {
+        "\nQual o menor País do mundo ? \nA) Vaticano\nB) Canadá\nC) Malta\nD) São Marino\n",
+        "\nQual o Maior País do mundo ?\nA) Brasil\nB) India\nC) Russia\nD) Alemanha\n",
+        "\nQual é a capital do Canadá? \nA) new York\nB) Brasilia\nC) Paris\nD) Ottawa\n",
+        "\nQual é o rio mais longo do mundo? \nA) Amazonas\nB) Nilo\nC) Ganges\nD) Congo\n",
+        "\nQual é a capital de Malta? \nA) Valletta \nB) Kiev\nC) Berlim\nD) Budapeste\n",
+        "\nQual a capital do Brasil ? \nA) São Paulo\nB) Rio de Janeiro\nC) Curitiba\nD) Brasilia\n",
+        "\nQuantos Distritos Há em Portugal ? \nA) 15\nB) 18\nC) 16\nD) 19\n",
+        "\nQue país tem mais ilhas na Europa? \nA) Cabo Verde\nB) Espanha\nC) Portugal\nD) Suécia\n",
+        "\nQuantos estados há no Brasil ? \nA) 22\nB) 25\nC) 28\nD) 27\n",
+        "\nQual a capital de Portugal? \nA) Lisboa\nB) Benfica\nC) Aveiro\nD) Madri\n",
+        "\nBraga, Faro e Guimarães são ? \nA) pontos turísticos da região Nordeste do Brasil\nB) cidades de Portugal\nC) conhecidos geógrafos brasileiros\nD) monumentos famosos localizados em Lima, no Peru\n",
+        "\nO maior oceano da Terra é o? \na) Oceano Pacífico\nB) Oceano Atlântico\nC) Oceano Índico\nD) Oceano Glacial Antártico\n",
+        "\nQual é aproximadamente a população do estado de São Paulo? \nA) 5 milhões\nB) 10 milhões\nC) 12 milhões\nD) 28 milhões\n",
+        "\nAcapulco é uma ?\na) ilha do Caribe\nB) cidade mexicana\nC capital europeia \nD) região de Tóquio, no Japão\n",
+        "\nO rio Paraná passa por três países, que são:\na) Argentina, Brasil e Paraguai\nB) Brasil, Uruguai e Paraguai\nC) Inglaterra, Espanha e França\nD) Brasil, Uruguai e Chile\n"
+    };
+
+
 string PerguntasHist[15] = {
 "\nNo início do século 20, aconteceram grandes eventos com alcance e impacto mundial. Um deles foi a Primeira Guerra. Você sabe dizer em qual período ela aconteceu?\na) 1912 a 1917\nb) 1910 a 1918\nc) 1914 a 1918\nd) 1911 a 1916\n",
 "\nQual é o ano do início da construção da Muralha da China?\na) 220 A.C.\nb) 180 A.C.\nc) 10 D.C.\nd) 100 D.C.\n",
@@ -455,11 +469,11 @@ void tema() {
         srand(time(NULL));
 
         for (int i = 0; i < 10; i++) {
-            string respostafinal = PerguntasGeo[rand() % 3];
+            string respostafinal = PerguntasGeo[rand() % 15];
             cout << respostafinal;
             cin >> respostafut;
 
-            if (respostafinal == PerguntasGeo[0] && respostafut == 'b') {
+            if (respostafinal == PerguntasGeo[0] && respostafut == 'a') {
                 cout << "Parabéns, está certo!";
                 score += 5;
 
@@ -469,7 +483,7 @@ void tema() {
                         break;
                     }
                 }
-            } else if (respostafinal == PerguntasGeo[1] && respostafut == 'd') {
+            } else if (respostafinal == PerguntasGeo[1] && respostafut == 'c') {
                 cout << "\nParabéns, está certo!";
                 score += 5;
 
@@ -479,7 +493,7 @@ void tema() {
                         break;
                     }
                 }
-            } else if (respostafinal == PerguntasGeo[2] && respostafut == 'a') {
+            } else if (respostafinal == PerguntasGeo[2] && respostafut == 'd') {
                 cout << "\nParabéns, está certo!";
                 score += 5;
 
@@ -489,7 +503,128 @@ void tema() {
                         break;
                     }
                 }
-            } else {
+            } else if (respostafinal == PerguntasGeo[3] && respostafut == 'b') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[4] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[5] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[6] && respostafut == 'c') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[7] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[8] && respostafut == 'd') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[9] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[10] && respostafut == 'b') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[11] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[12] && respostafut == 'c') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[13] && respostafut == 'b') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            } else if (respostafinal == PerguntasGeo[14] && respostafut == 'a') {
+                cout << "\nParabéns, está certo!";
+                score += 5;
+
+                for (auto& usuario : usuarios) {
+                    if (usuario.nome == UltimoNome && usuario.senha == UltimoSenha) {
+                        usuario.pontuacao = score;
+                        break;
+                    }
+                }
+            }
+            else {
                 cout << "\nResposta errada!";
             }
         }
